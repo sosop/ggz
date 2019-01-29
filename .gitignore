@@ -109,3 +109,5 @@ Thumbs.db
 .eslintrc
 .gitattributes
 .travis.yml
+
+.idea/
