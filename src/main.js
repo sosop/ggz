@@ -7,6 +7,9 @@ import axios from 'axios'
 
 Vue.use(iView, axios);
 
+axios.defaults.baseURL = "http://127.0.0.1:8989"
+axios.defaults.timeout = 3000
+
 Vue.config.productionTip = false
 
 new Vue({
