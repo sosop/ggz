@@ -31,14 +31,14 @@
       </Header>
       <Layout>
         <Sider hide-trigger :style="{background: '#fff'}">
-          <Menu theme="light" width="auto" :open-names="['1']">
+          <Menu theme="light" width="auto" :open-names="['config']">
             <Submenu name="config">
               <template slot="title">
                 <Icon type="md-cog"></Icon>
                 配置
               </template>
-              <MenuItem name="globalConfig"><router-link to="/globalConfig">全局配置</router-link></MenuItem>
-              <MenuItem name="projectConfig">项目配置</MenuItem>
+              <MenuItem name="globalConfig"><router-link to="/config/global">全局配置</router-link></MenuItem>
+              <MenuItem name="tokenConfig"><router-link to="/config/token">TOKEN配置</router-link></MenuItem>
             </Submenu>
             <Submenu name="build">
               <template slot="title">
@@ -66,7 +66,22 @@
   </div>
 </template>
 <script>
+    import store from './store'
     export default {
-      name: 'app'
+        name: 'app',
+        // 测试，模拟用户邓丽
+        created: function() {
+            store.state.user = {
+                fullName: "侯小龙",
+                email: "houxiaolong@lixin360.com",
+                groups: [
+                    {id: "0", name: "信贷组"},
+                    {id: "1", name: "消金组"},
+                    {id: "2", name: "金融组"},
+                    {id: "3", name: "利卡组"},
+                    {id: "100", name: "非业务项目"}
+                ]
+            }
+        }
     }
 </script>

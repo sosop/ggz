@@ -29,12 +29,12 @@
                 axios.post("/config/global", {
                     address: this.protocol + this.gitlabAddr
                 }).then(function (resp) {
-                    if (resp.data.Code === 0) {
+                    if (resp.data.code === 0) {
                         obj.$Message.success("提交成功")
                         obj.editable = false
                         return
                     }
-                    obj.$Message.warning(resp.data.Msg)
+                    obj.$Message.warning(resp.data.msg)
                 }).catch(function (error) {
                     obj.$Message.error('提交错误:' + error);
                 })
@@ -43,11 +43,11 @@
         created: function() {
             let obj = this;
             axios.get("/config/global").then(function (resp) {
-                if (resp.data.Code !== 0) {
-                    obj.$Message.warning(resp.data.Msg);
+                if (resp.data.code !== 0) {
+                    obj.$Message.warning(resp.data.msg);
                     return
                 }
-                let url = resp.data.Data.Address.split("//")
+                let url = resp.data.data.address.split("//")
                 obj.protocol = url[0] + "//"
                 obj.gitlabAddr = url[1]
                 obj.editable = false

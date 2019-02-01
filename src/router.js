@@ -6,10 +6,15 @@ Vue.use(Router)
 
 export default new Router({
   routes: [
-    {
-      path: '/globalConfig',
-      name: 'globalConfig',
-      component: () => import('./components/GlobalConfig.vue')
-    }
+      {
+        path: '/config/global',
+        name: 'global',
+        component: () => import('./components/GlobalConfig.vue')
+      },
+      {
+          path: '/config/token',
+          name: 'token',
+          component: () => import('./components/TokenConfig.vue')
+      }
   ]
 })
