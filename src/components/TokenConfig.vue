@@ -1,5 +1,5 @@
 <template>
-    <div class="mid fromTop" style="width: 50%;">
+    <div class="mid fromTop" style="width: 90%;">
         <RadioGroup v-model="group" @on-change="groupChange">
             <span>可选组：</span>
             <Radio v-for="g in groups" :label="g.id" :key="g.id">
@@ -10,7 +10,11 @@
         <div class="mid" style="width: 30%">
             <Input v-show="group !== ''" v-model="tokenV" placeholder="输入PrivateToken,回车确认" clearable @on-enter="addToken"/>
         </div>
-        <Tag v-for="t in tokens" :key="t" :name="t" closable @on-close="delToken(t)">PrivateToken: {{ t }}</Tag>
+        <div style="margin-top: 5%">
+            <div>
+                <Tag v-for="(_, k, i) in tokens" :key="k" :name="i" closable @on-close="delToken(k)">PrivateToken: {{ k }}</Tag>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -23,7 +27,7 @@
         data: function() {
             return {
                 group: "",
-                tokens: [],
+                tokens: {},
                 groups: [],
                 tokenV: ""
             }
@@ -36,7 +40,8 @@
                 let obj = this
                 axios.get('/config/project/setting/' + obj.group).then(function (resp) {
                     if (resp.data.code === 0) {
-                        // todo
+                        obj.tokens = resp.data.data
+                        return
                     }
                     obj.$Message.warning(resp.data.msg)
                 }).catch(function (error) {
@@ -50,6 +55,7 @@
                 let obj = this
                 axios.post('/config/project/setting/' + obj.group + "/" + obj.tokenV).then(function (resp) {
                     if (resp.data.code === 0) {
+                        obj.tokens[obj.tokenV] = {}
                         obj.tokenV = ''
                         obj.$Message.success("添加token成功")
                         return
@@ -63,7 +69,8 @@
                 let obj = this
                 axios.delete('/config/project/setting/' + obj.group + "/" + t).then(function (resp) {
                     if (resp.data.code === 0) {
-                        // obj.$Message.success("添加token成功")
+                        obj.$Message.success("删除token：" + t + "成功")
+                        obj.tokens = resp.data.data
                         return
                     }
                     obj.$Message.warning(resp.data.msg)
@@ -79,9 +86,9 @@
     .mid{
         position: absolute;
         left: 50%;
-        transform: translateX(-50%) translateY(-50%);
+        transform: translateX(-50%);
     }
     .fromTop{
-        top: 30%;
+        top: 10px;
     }
 </style>

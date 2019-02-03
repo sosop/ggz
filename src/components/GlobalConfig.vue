@@ -47,6 +47,9 @@
                     obj.$Message.warning(resp.data.msg);
                     return
                 }
+                if (resp.data.data.address === '') {
+                    return
+                }
                 let url = resp.data.data.address.split("//")
                 obj.protocol = url[0] + "//"
                 obj.gitlabAddr = url[1]
