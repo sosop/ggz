@@ -45,7 +45,7 @@
                 <Icon type="md-construct"></Icon>
                 构建
               </template>
-              <MenuItem name="buildProject">构建项目</MenuItem>
+              <MenuItem name="buildProject"><router-link to="/build/project">构建项目</router-link></MenuItem>
             </Submenu>
             <Submenu name="deploy">
               <template slot="title">
@@ -75,10 +75,10 @@
                 fullName: "侯小龙",
                 email: "houxiaolong@lixin360.com",
                 groups: [
-                    {id: "0", name: "信贷组"},
-                    {id: "1", name: "消金组"},
-                    {id: "2", name: "金融组"},
-                    {id: "3", name: "利卡组"},
+                    {id: "0", name: "xindai"},
+                    {id: "1", name: "xiaojin"},
+                    {id: "2", name: "jinrong"},
+                    {id: "3", name: "lk"},
                     {id: "100", name: "非业务项目"}
                 ]
             }

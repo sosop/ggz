@@ -15,6 +15,11 @@ export default new Router({
           path: '/config/token',
           name: 'token',
           component: () => import('./components/TokenConfig.vue')
+      },
+      {
+          path: '/build/project',
+          name: 'project',
+          component: () => import('./components/Project.vue')
       }
   ]
 })
