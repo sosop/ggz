@@ -45,7 +45,8 @@
                 <Icon type="md-construct"></Icon>
                 构建
               </template>
-              <MenuItem name="buildProject"><router-link to="/build/project">构建项目</router-link></MenuItem>
+              <MenuItem name="buildProject"><router-link to="/build/project">添加项目</router-link></MenuItem>
+              <MenuItem name="buildProjectList"><router-link to="">自动构建列表</router-link></MenuItem>
             </Submenu>
             <Submenu name="deploy">
               <template slot="title">

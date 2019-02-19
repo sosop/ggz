@@ -10,13 +10,14 @@
                         :remote-method="findAll"
                         :loading="loading"
                         @on-change="branchById">
-                    <Option v-for="(opt, index) in options" :value="opt.value" :key="index">{{opt.label}}</Option>
+                    <Option v-for="(opt, index) in options" :value="opt.id" :key="index">{{opt.path_with_namespace}}</Option>
                 </Select>
             </Col>
             <Col span="12" style="padding-right:10px">
                 <Select v-model="branchName" style="width: 50%">
                     <Option v-for="(branch, index) in branchs" :value="branch.name" :key="index">{{ branch.name }}</Option>
                 </Select>
+                <Button type="primary" style="margin-left: 10px;" @click="build">构建</Button>
             </Col>
         </Row>
 
@@ -46,7 +47,8 @@
                     this.loading = true;
                     setTimeout(() => {
                         this.loading = false;
-                        this.options = this.projects.filter(item => item.label.toLowerCase().indexOf(query.toLowerCase()) > -1);
+                        // this.options = this.projects.filter(item => item.label.toLowerCase().indexOf(query.toLowerCase()) > -1);
+                        this.options = this.projects
                     }, 200);
                 } else {
                     this.options = [];
@@ -70,6 +72,11 @@
                 }).catch(function (error) {
                     obj.$Message.error('获取项目失败' + error);
                 })
+            },
+            build: function() {
+                if (this.projectName === '' || this.branchName === '') {
+                    this.$Message.warning("请选择需要构建的项目及分支");
+                }
             }
         },
         created: function() {
@@ -83,6 +90,7 @@
                     return
                 }
                 // 将id/fullname映射
+                /*
                 obj.projects = resp.data.data.map(item => {
                     return {
                         value: item["id"],
@@ -91,6 +99,8 @@
                         token: item["privateToken"],
                     };
                 })
+                */
+                obj.projects = resp.data.data;
             }).catch(function (error) {
                 obj.$Message.error('获取项目失败' + error);
             })
